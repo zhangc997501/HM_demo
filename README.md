@@ -42,3 +42,6 @@ python main.py                   # http://127.0.0.1:8989/docs
 
 - **不要把 `.env` 提交到仓库**，它已被 `.gitignore` 忽略；新增配置项请同步更新 `.env.example`。
 - 音频、日志、`.idea/`、`__pycache__/` 均不纳入版本管理。
+- 分支：`main` 为主干，功能开发走 `feat/xxx` 分支，改完再合回 `main`。
+- 提交信息：`<type>(<scope>): <中文摘要>`，type 取 `feat` / `fix` / `docs` / `refactor` / `chore`，
+  scope 如 `voice`、`db`、`config`。一行摘要说清"做了什么"，正文用 `-` 列表说明"为什么 / 影响面"。
