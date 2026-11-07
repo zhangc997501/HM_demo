@@ -38,6 +38,25 @@ python main.py                   # http://127.0.0.1:8989/docs
 响应统一为 `{code, session_id, user_text, reply, audio, elapsed_ms}`，`code=0` 表示成功。
 多轮对话靠回传同一个 `session_id`，历史保存在进程内 `SESSIONS` 字典（重启即丢，未接 Redis）。
 
+## 提交与推送
+
+本机 Clash 处于「规则模式」时，github.com 会被判定为直连，`git push` 直接失败：
+
+```
+fatal: unable to access 'https://github.com/zhangc997501/HM_demo.git/':
+Recv failure: Connection was reset
+```
+
+用仓库自带的脚本推送即可（临时把 Clash 切到全局模式，推完自动还原）：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\push.ps1
+```
+
+脚本会从 Windows 系统代理读取 Clash 的 http 端口，探测控制器（`127.0.0.1:33212`，备选 9090/9091/9097/6170），
+读当前 mode → 切 global → `git push -u origin main` → 无论成败都改回原 mode。
+如果哪天在 Clash 里给 github.com 配了「走代理」的规则，就可以直接 `git push`，脚本也不会再改 mode。
+
 ## 约定
 
 - **不要把 `.env` 提交到仓库**，它已被 `.gitignore` 忽略；新增配置项请同步更新 `.env.example`。
