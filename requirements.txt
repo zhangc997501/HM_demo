@@ -1,0 +1,25 @@
+# 运行环境：Python >= 3.10
+# 代码里用了 `str | None`、`dict[str, list]` 这类 3.10+ 才支持的注解语法，
+# 在 3.9 下定义函数时就会抛 TypeError: unsupported operand type(s) for |: 'type' and 'NoneType'。
+# 安装：pip install -r requirements.txt
+
+# ---- Web 框架 ----
+fastapi>=0.110
+uvicorn[standard]>=0.27          # [standard] 带 uvloop/httptools，热重载也依赖它
+
+# ---- 配置 ----
+python-dotenv>=1.0
+
+# ---- 大模型：阿里云百炼（OpenAI 兼容协议）----
+openai>=1.30
+dashscope>=1.20                  # 语音识别 Recognition 走 DashScope 原生 SDK
+
+# ---- 本地录音（modules/recording.py）----
+numpy>=1.26
+sounddevice>=0.4.6
+
+# ---- 以下暂未在代码中 import，按需启用时再打开 ----
+# pymupdf>=1.24                  # db/mysql_init.sql 里的简历 PDF 文本提取
+# pymysql>=1.1                   # MySQL 连接
+# redis>=5.0                     # 把进程内 SESSIONS 换成 Redis 时会用到
+# oss2>=2.18                     # OSS_ENABLED 打开后上传简历 PDF / JD 图片

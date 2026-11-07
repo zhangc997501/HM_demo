@@ -16,16 +16,31 @@ modules/
 db/
   mysql_init.sql        数据库初始化脚本
   oss_url.sql           OSS 相关表结构 / 字段调整
+scripts/
+  push.ps1              推送脚本：临时把 Clash 切全局模式 → push → 还原 mode
+requirements.txt        依赖清单（要求 Python >= 3.10）
+CONTRIBUTING.md         协作开发指南：邀请协作者、分支与 PR、密钥纪律
 Audioresources/         运行时生成的音频（已在 .gitignore 中忽略）
 ```
 
 ## 快速开始
 
+需要 **Python >= 3.10**（代码使用了 `str | None` 等 3.10+ 注解语法）。
+
 ```powershell
-pip install fastapi uvicorn python-dotenv openai dashscope numpy sounddevice
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+
 Copy-Item .env.example .env      # 然后填入 API_KEY、JWT_SECRET、数据库密码等
+
+mysql -u root -p < db\mysql_init.sql
+mysql -u root -p < db\oss_url.sql
+
 python main.py                   # http://127.0.0.1:8989/docs
 ```
+
+多人协作（邀请协作者、分支与 PR 流程、密钥纪律）见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 ## 接口
 
