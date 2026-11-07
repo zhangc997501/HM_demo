@@ -1,0 +1,50 @@
+# ==================== 密钥 / 环境变量 ====================
+# .env 里是 API Key、JWT 密钥、数据库密码、OSS AK，绝对不能进仓库
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ==================== Python ====================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# ==================== 虚拟环境 ====================
+.venv/
+venv/
+env/
+ENV/
+python_env/
+
+# ==================== IDE / 编辑器 ====================
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+*~
+
+# ==================== 运行时产物：录音与音频 ====================
+# voice_api 运行时往 Audioresources/ 写 .pcm/.wav，属于本机生成的数据
+Audioresources/
+rec.wav
+*.pcm
+
+# ==================== 日志 / 系统垃圾 ====================
+*.log
+logs/
+.DS_Store
+Thumbs.db
+desktop.ini
